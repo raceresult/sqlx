@@ -14,7 +14,6 @@ package sqlx
 
 import (
 	"context"
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -26,6 +25,7 @@ import (
 	"github.com/jmoiron/sqlx/reflectx"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
+	sql "github.com/raceresult/rrsql"
 )
 
 func MultiExecContext(ctx context.Context, e ExecerContext, query string) {

@@ -11,7 +11,6 @@
 package sqlx
 
 import (
-	"database/sql"
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
@@ -26,6 +25,7 @@ import (
 	"github.com/jmoiron/sqlx/reflectx"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
+	sql "github.com/raceresult/rrsql"
 )
 
 /* compile time checks that Db, Tx, Stmt (qStmt) implement expected interfaces */

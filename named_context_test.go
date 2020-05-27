@@ -4,8 +4,9 @@ package sqlx
 
 import (
 	"context"
-	"database/sql"
 	"testing"
+
+	sql "github.com/raceresult/rrsql"
 )
 
 func TestNamedContextQueries(t *testing.T) {

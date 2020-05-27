@@ -13,7 +13,6 @@ package sqlx
 //
 import (
 	"bytes"
-	"database/sql"
 	"errors"
 	"fmt"
 	"reflect"
@@ -22,6 +21,7 @@ import (
 	"unicode"
 
 	"github.com/jmoiron/sqlx/reflectx"
+	sql "github.com/raceresult/rrsql"
 )
 
 // NamedStmt is a prepared statement that executes named queries.  Prepare it

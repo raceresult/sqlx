@@ -1,11 +1,9 @@
 package sqlx
 
 import (
-	"database/sql"
 	"database/sql/driver"
 	"errors"
 	"fmt"
-
 	"io/ioutil"
 	"path/filepath"
 	"reflect"
@@ -13,6 +11,7 @@ import (
 	"sync"
 
 	"github.com/jmoiron/sqlx/reflectx"
+	sql "github.com/raceresult/rrsql"
 )
 
 // Although the NameMapper is convenient, in practice it should not
@@ -593,6 +592,15 @@ func (r *Rows) MapScan(dest map[string]interface{}) error {
 // positions to fields to avoid that overhead per scan, which means it is not safe
 // to run StructScan on the same Rows instance with different struct types.
 func (r *Rows) StructScan(dest interface{}) error {
+	return r.structScan(false, dest)
+}
+
+// StructScanSkipNulls is an alternate StructScan function with the option to skip null values coming from the db.
+func (r *Rows) StructScanSkipNulls(dest interface{}) error {
+	return r.structScan(true, dest)
+}
+
+func (r *Rows) structScan(skipNulls bool, dest interface{}) error {
 	v := reflect.ValueOf(dest)
 
 	if v.Kind() != reflect.Ptr {
@@ -622,7 +630,11 @@ func (r *Rows) StructScan(dest interface{}) error {
 		return err
 	}
 	// scan into the struct field pointers and append to our results
-	err = r.Scan(r.values...)
+	if skipNulls {
+		err = r.ScanSkipNulls(r.values...)
+	} else {
+		err = r.Scan(r.values...)
+	}
 	if err != nil {
 		return err
 	}

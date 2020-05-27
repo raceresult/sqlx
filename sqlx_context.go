@@ -4,11 +4,12 @@ package sqlx
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
 	"reflect"
+
+	sql "github.com/raceresult/rrsql"
 )
 
 // ConnectContext to a database and verify with a ping.

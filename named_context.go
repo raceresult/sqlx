@@ -4,7 +4,8 @@ package sqlx
 
 import (
 	"context"
-	"database/sql"
+
+	sql "github.com/raceresult/rrsql"
 )
 
 // A union interface of contextPreparer and binder, required to be able to

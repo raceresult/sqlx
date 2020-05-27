@@ -1,8 +1,9 @@
 package sqlx
 
 import (
-	"database/sql"
 	"testing"
+
+	sql "github.com/raceresult/rrsql"
 )
 
 func TestCompileQuery(t *testing.T) {
